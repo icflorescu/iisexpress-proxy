@@ -28,10 +28,10 @@ For instance, if your application is running on IIS Express on port 51123, run:
 
 The program will list the external addresses you can use for testing your application on remote devices.
 
-![iisexpress-proxy](https://raw.github.com/icflorescu/iisexpress-proxy/master/diagram.jpg)
-
 ## How does it work
 It's proxying the HTTP traffic on `http://localhost:localPort` to `proxyPort` on all the available network interfaces and it's also [changing the origin of the host header to localhost](https://github.com/nodejitsu/node-http-proxy/blob/master/lib/http-proxy.js#L43), allowing you to test web applications hosted by IIS Express on various remote devices (mobile devices, other desktops, etc.).
+
+![iisexpress-proxy](https://raw.github.com/icflorescu/iisexpress-proxy/master/diagram.jpg)
 
 ## Credits and attributions
 This command-line utility is a simple wrapper around [http-proxy](https://github.com/nodejitsu/node-http-proxy).
