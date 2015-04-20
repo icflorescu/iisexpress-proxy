@@ -38,7 +38,7 @@ This command-line utility is a simple wrapper around [http-proxy](https://github
 The original [http-proxy](https://github.com/nodejitsu/node-http-proxy) logo was created by [Diego Pasquali](http://dribbble.com/diegopq). Elements from a [business vector designed by Freepik](http://www.freepik.com/free-photos-vectors/business) were used in the above diagram.
 
 ## Endorsing the author
-If you find this piece of software useful, please [tweet about it](http://twitter.com/share?text=Checkout%20iisexpress-proxy%20-%20the%20simple%20way%20to%20access%20your%20IIS%20Express%20applications%20from%20remote%20devices!&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fiisexpress-proxy&hashtags=iisexpress%2Cremote%2Cvisualstudio%2Cnode.js%2Cjavascript&via=icflorescu) and endorse me on LinkedIn:
+If you find this piece of software useful, please [tweet about it](http://twitter.com/share?text=Access%20your%20IIS%20Express%20applications%20from%20remote%20devices&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fiisexpress-proxy&hashtags=iisexpress%2Cremote%2Cvisualstudio%2Cnode.js&via=icflorescu) and endorse me on LinkedIn:
 
 [![Ionut-Cristian Florescu on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x25.png)](https://www.linkedin.com/in/icflorescu)
 
