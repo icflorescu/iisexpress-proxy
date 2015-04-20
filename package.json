@@ -1,0 +1,32 @@
+{
+  "name": "iisexpress-proxy",
+  "version": "0.1.0",
+  "description": "A simple local proxy useful for accessing IIS Express from remote machines.",
+  "preferGlobal": true,
+  "main": "index.js",
+  "bin": { "iisexpress-proxy": "./index.js" },
+  "keywords": [
+    "iisexpress",
+    "proxy",
+    "remote",
+    "iis",
+    "visualstudio",
+    "vs"
+  ],
+  "author": {
+    "name": "Ionut-Cristian Florescu",
+    "email": "ionut.florescu@gmail.com",
+    "url": "https://github.com/icflorescu"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/icflorescu/iisexpress-proxy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/icflorescu/iisexpress-proxy/issues"
+  },
+  "dependencies": {
+    "http-proxy": "^1.10.1"
+  }
+}
