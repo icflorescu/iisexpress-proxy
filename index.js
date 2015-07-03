@@ -34,9 +34,19 @@ Object.keys(interfaces).forEach(function(name) {
   });
 });
 
-proxy.createProxyServer({
+var currentProxy = proxy.createProxyServer({
   target: 'http://localhost:' + localPort,
   changeOrigin: true
 }).listen(proxyPort, function() {
   console.log('Listening... [ press Control-C to exit ]');
+});
+
+currentProxy.on('error', function (err, req, res) {
+  res.writeHead(500, {
+    'Content-Type': 'text/plain'
+  });
+
+  console.log(err);
+
+  res.end('Aw snap; something went wrong.');
 });
