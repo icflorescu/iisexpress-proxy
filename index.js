@@ -9,7 +9,7 @@ var os = require('os'),
       console.log('Usage example:\n %s 51123 to 3000', Object.keys(pkg.bin)[0]);
       process.exit();
     },
-    localPort, proxyPort;
+    localPort, proxyPort, currentProxy;
 
 console.log('IIS Express Proxy %s', ver);
 
@@ -34,7 +34,7 @@ Object.keys(interfaces).forEach(function(name) {
   });
 });
 
-var currentProxy = proxy.createProxyServer({
+currentProxy = proxy.createProxyServer({
   target: 'http://localhost:' + localPort,
   changeOrigin: true
 }).listen(proxyPort, function() {
@@ -45,8 +45,6 @@ currentProxy.on('error', function (err, req, res) {
   res.writeHead(500, {
     'Content-Type': 'text/plain'
   });
-
-  console.log(err);
-
-  res.end('Aw snap; something went wrong.');
+  console.log(err.stack);
+  res.end('Aw snap; something went wrong. Check your console to see the error.');
 });
