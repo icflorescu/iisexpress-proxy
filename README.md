@@ -4,10 +4,10 @@
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
-A simple, yet practical command-line utility for .NET developers looking to test web applications served by IIS Express on remote devices.
+A simple, yet practical command-line utility enabling .NET developers to test web applications served by IIS Express on remote devices.
 
 ## Motivation
-Are you a .NET developer building mobile web application?
+Are you a .NET developer building mobile web applications?
 Have you ever been frustrated by the fact that [there's no easy way](https://www.google.com/search?q=iis+express+remote+access) to enable IIS Express to accept connections from remote devices?...
 
 ## Installation
@@ -22,7 +22,7 @@ If you installed **iisexpress-proxy** as a global module:
 
     iisexpress-proxy localPort to proxyPort
 
-For instance, if your application is running on IIS Express on port 51123, run:
+For instance, if your application's IIS Express port is 51123, run this in the Command Prompt:
 
     iisexpress-proxy 51123 to 3000
 
