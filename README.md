@@ -4,7 +4,7 @@
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
-Simple command-line utility for .NET developers looking to test web applications served by IIS Express on remote devices.
+A simple, yet practical command-line utility for .NET developers looking to test web applications served by IIS Express on remote devices.
 
 ## Motivation
 Are you a .NET developer building mobile web application?
