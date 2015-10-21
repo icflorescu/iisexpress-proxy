@@ -6,10 +6,10 @@ var os = require('os'),
     pkg = require('./package'),
     ver = pkg.version,
     exit = function() {
-      console.log('Usage example:\n %s 51123 to 3000', Object.keys(pkg.bin)[0]);
+      console.log('Usage example:\n %s [192.168.0.100:]51123 to 3000', Object.keys(pkg.bin)[0]);
       process.exit();
     },
-    localPort, proxyPort, currentProxy;
+    source, host, port, proxyPort, currentProxy;
 
 console.log('IIS Express Proxy %s', ver);
 
@@ -17,14 +17,16 @@ if (process.argv.length != 5 || process.argv[3].toLowerCase() !== 'to') {
   exit();
 }
 
-localPort = parseInt(process.argv[2]);
+source    = process.argv[2].split(':');
+host      = source.length == 1 ? 'localhost' : source[0];
+port      = parseInt(source[source.length == 1 ? 0 : 1]);
 proxyPort = parseInt(process.argv[4]);
 
-if (isNaN(localPort) || isNaN(proxyPort)) {
+if (isNaN(port) || isNaN(proxyPort)) {
   exit();
 }
 
-console.log('Proxying localhost:%d to:', localPort);
+console.log('Proxying %s:%d to:', host, port);
 
 Object.keys(interfaces).forEach(function(name) {
   interfaces[name].filter(function(item) {
@@ -35,7 +37,7 @@ Object.keys(interfaces).forEach(function(name) {
 });
 
 currentProxy = proxy.createProxyServer({
-  target: 'http://localhost:' + localPort,
+  target: 'http://' + host + ':' + port,
   changeOrigin: true
 }).listen(proxyPort, function() {
   console.log('Listening... [ press Control-C to exit ]');
