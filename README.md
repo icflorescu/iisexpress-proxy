@@ -35,7 +35,7 @@ You can also use **iisexpress-proxy** to expose an IIS server instance running o
 
 For instance, let's conside this scenario:
 - the application is running on 192.168.96.3:5000 and **it only accepts connections from clients within a VPN**;
-- your development machine has a network interface within the same VPN and another publicly accesible one (192.168.0.102);
+- your development machine has a network interface within the same VPN and another publicly accessible one (192.168.0.102);
 - **you need to test the application from mobile devices without having to add those devices to the VPN**.
 
 By running this in the Command Prompt:
