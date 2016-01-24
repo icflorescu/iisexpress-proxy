@@ -60,6 +60,10 @@ If you find this piece of software useful, please [tweet about it](http://twitte
 
 [![Ionut-Cristian Florescu on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x25.png)](https://www.linkedin.com/in/icflorescu)
 
+## License
+
+The [ISC License](https://github.com/icflorescu/iisexpress-proxy/blob/master/LICENSE).
+
 [npm-image]: https://img.shields.io/npm/v/iisexpress-proxy.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/iisexpress-proxy
 [david-image]: http://img.shields.io/david/icflorescu/iisexpress-proxy.svg?style=flat-square
