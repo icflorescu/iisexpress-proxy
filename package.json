@@ -29,6 +29,6 @@
     "url": "https://github.com/icflorescu/iisexpress-proxy/issues"
   },
   "dependencies": {
-    "http-proxy": "^1.11.3"
+    "http-proxy": "^1.13.1"
   }
 }
