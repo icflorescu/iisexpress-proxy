@@ -4,6 +4,8 @@
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
+![iisexpress-proxy](https://cloud.githubusercontent.com/assets/581999/13374338/4db36f40-dd8a-11e5-9248-a00a22e97eb0.png)
+
 A simple, yet practical command-line utility enabling .NET developers to test web applications served by IIS Express on remote devices.
 
 ## Motivation
@@ -49,14 +51,12 @@ Note: *This functionality was added at v1.1.0 (released 10/21/2015)*.
 ## How does it work
 It's proxying the HTTP traffic on `localPort` to `proxyPort` on all the available network interfaces and it's also [changing the origin of the host header](https://github.com/nodejitsu/node-http-proxy/blob/master/lib/http-proxy.js#L44), allowing you to test web applications hosted by IIS Express on various remote devices (mobile devices, other desktops, etc.).
 
-![iisexpress-proxy](https://raw.github.com/icflorescu/iisexpress-proxy/master/diagram.jpg)
-
 ## Credits and attributions
-This command-line utility is a simple wrapper around [http-proxy](https://github.com/nodejitsu/node-http-proxy).
-The original [http-proxy](https://github.com/nodejitsu/node-http-proxy) logo was created by [Diego Pasquali](http://dribbble.com/diegopq). Elements from a [business vector designed by Freepik](http://www.freepik.com/free-photos-vectors/business) were used in the above diagram.
+This command-line utility wraps [http-proxy](https://github.com/nodejitsu/node-http-proxy).
+The original [http-proxy](https://github.com/nodejitsu/node-http-proxy) logo was created by [Diego Pasquali](http://dribbble.com/diegopq).
 
 ## Endorsing the author
-If you find this piece of software useful, please [tweet about it](http://twitter.com/share?text=Access%20your%20IIS%20Express%20applications%20from%20remote%20devices&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fiisexpress-proxy&hashtags=iisexpress%2Cremote%2Cvisualstudio%2Cnode.js&via=icflorescu) and endorse me on LinkedIn:
+If you find this repo useful, please give it a star, [tweet about it](http://twitter.com/share?text=Access%20your%20IIS%20Express%20applications%20from%20remote%20devices&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fiisexpress-proxy&hashtags=iisexpress%2Cremote%2Cvisualstudio%2Cnode.js&via=icflorescu) and endorse me on LinkedIn:
 
 [![Ionut-Cristian Florescu on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x25.png)](https://www.linkedin.com/in/icflorescu)
 
