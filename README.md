@@ -48,6 +48,10 @@ By running this in the Command Prompt:
 
 Note: *This functionality was added at v1.1.0 (released 10/21/2015)*.
 
+## Limitations
+
+`iisexpress-proxy` doesn't work in scenarios involving integrated Windows authentication (see issue #[here](https://github.com/icflorescu/iisexpress-proxy/issues/5)).
+
 ## How does it work
 It's proxying the HTTP traffic on `localPort` to `proxyPort` on all the available network interfaces and it's also [changing the origin of the host header](https://github.com/nodejitsu/node-http-proxy/blob/master/lib/http-proxy.js#L44), allowing you to test web applications hosted by IIS Express on various remote devices (mobile devices, other desktops, etc.).
 
