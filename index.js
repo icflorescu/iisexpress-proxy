@@ -29,7 +29,7 @@ var protocolPrefix = 'http://',
 if (source === null) {
   port = parseInt(process.argv[2], 10);
 } else {
-  protocolPrefix = source[1] || 'http://';
+  protocolPrefix = source[1] || 'https://';
   host = source[2];
   port = parseInt(source[3], 10);
 }
@@ -53,6 +53,7 @@ Object.keys(interfaces).forEach(function(name) {
 
 proxy.createProxyServer({
   target: protocolPrefix + host + ':' + port,
+  secure: false,
   changeOrigin: true
 }).listen(proxyPort, function() {
   console.log('Listening... [press Control-C to exit]');
