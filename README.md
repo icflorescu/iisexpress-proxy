@@ -55,6 +55,8 @@ Note: *This functionality was added at v1.1.0 (released 10/21/2015)*.
 ## How does it work
 It's proxying the HTTP traffic on `localPort` to `proxyPort` on all the available network interfaces and it's also [changing the origin of the host header](https://github.com/nodejitsu/node-http-proxy/blob/master/lib/http-proxy.js#L44), allowing you to test web applications hosted by IIS Express on various remote devices (mobile devices, other desktops, etc.).
 
+If you need to access the original host requested by the browser, the request headers will include X-Forward headers. In ASP.NET, `Request.Headers["x-forwarded-host"]` will contain the requested host.
+
 ## Credits and attributions
 This command-line utility wraps [http-proxy](https://github.com/nodejitsu/node-http-proxy).
 The original [http-proxy](https://github.com/nodejitsu/node-http-proxy) logo was created by [Diego Pasquali](http://dribbble.com/diegopq).
