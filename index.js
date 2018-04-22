@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var os = require('os'),
-	http = require('http'),
+    http = require('http'),
     httpProxy = require('http-proxy'),
     pkg = require('./package');
 
@@ -56,7 +56,7 @@ var proxy = new httpProxy.createProxyServer({
   target: {
     host: host,
     port: port,
-	protocol: protocolPrefix
+    protocol: protocolPrefix
   },
   secure: false,
   changeOrigin: true,
