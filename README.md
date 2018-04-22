@@ -48,6 +48,8 @@ By running this in the Command Prompt:
 
 Note: *This functionality was added at v1.1.0 (released 10/21/2015)*.
 
+WebSocket support was added in `v1.4.0` by [Stan Hebben](https://github.com/stanhebben) - see [PR #11](https://github.com/icflorescu/iisexpress-proxy/pull/21) for details.
+
 ## Limitations
 
 `iisexpress-proxy` doesn't work in scenarios involving integrated Windows authentication (see issue #[here](https://github.com/icflorescu/iisexpress-proxy/issues/5)).
