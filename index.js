@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 var os = require('os'),
-    proxy = require('http-proxy'),
+	http = require('http'),
+    httpProxy = require('http-proxy'),
     pkg = require('./package');
 
 var exit = function() {
@@ -51,12 +52,24 @@ Object.keys(interfaces).forEach(function(name) {
   });
 });
 
-proxy.createProxyServer({
-  target: protocolPrefix + host + ':' + port,
+var proxy = new httpProxy.createProxyServer({
+  target: {
+    host: host,
+    port: port,
+	protocol: protocolPrefix
+  },
   secure: false,
   changeOrigin: true,
   xfwd: true
-}).listen(proxyPort, function() {
+});
+var proxyServer = http.createServer(function (req, res) {
+  proxy.web(req, res);
+});
+proxyServer.on('upgrade', function (req, socket, head) {
+  proxy.ws(req, socket, head);
+});
+
+proxyServer.listen(proxyPort, function() {
   console.log('Listening... [press Control-C to exit]');
 }).on('error', function (err, req, res) {
   console.log(err.stack);
