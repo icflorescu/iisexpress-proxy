@@ -61,6 +61,9 @@ var proxy = new httpProxy.createProxyServer({
   secure: false,
   changeOrigin: true,
   xfwd: true
+}).on('error', function (err) {
+  console.log(err);
+  console.log('Listening... [press Control-C to exit]');
 });
 var proxyServer = http.createServer(function (req, res) {
   proxy.web(req, res);
