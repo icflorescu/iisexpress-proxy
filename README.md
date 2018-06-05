@@ -20,7 +20,11 @@ Most likely you'll want **iisexpress-proxy** installed as a global module:
 Note: *You need to have [Node.js](https://nodejs.org/) installed.*
 
 ## Usage
-If you installed **iisexpress-proxy** as a global module:
+If you're using `npm@^5.2.0`:
+
+    npx iisexpress-proxy localPort to proxyPort
+
+Alternatively, if you installed **iisexpress-proxy** as a global `npm` module:
 
     iisexpress-proxy localPort to proxyPort
 
@@ -67,6 +71,10 @@ The original [http-proxy](https://github.com/nodejitsu/node-http-proxy) logo was
 If you find this repo useful, please give it a star, [tweet about it](http://twitter.com/share?text=Access%20your%20IIS%20Express%20applications%20from%20remote%20devices&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fiisexpress-proxy&hashtags=iisexpress%2Cremote%2Cvisualstudio%2Cnode.js&via=icflorescu) and endorse me on LinkedIn:
 
 [![Ionut-Cristian Florescu on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x25.png)](https://www.linkedin.com/in/icflorescu)
+
+## Looking for co-maintainers
+
+I've completely switched away from .NET / IIS / Windows, so I'm not using `iisexpress-proxy` in my work anymore. I'm almost exclusively using Linux and macOS now, which means there's little incentive for me to actively contribute to this project anymore. I'll keep maintaining it and will gladly accept PRs, of course, but having a co-maintainer constantly using Windows as a development machine would be beneficial for the community. Please let me know if you're interested.
 
 ## Before raising issues
 
