@@ -13,7 +13,7 @@ Are you a .NET developer building mobile web applications?
 Have you ever been frustrated by the fact that [there's no easy way](https://www.google.com/search?q=iis+express+remote+access) to enable IIS Express to accept connections from remote devices?...
 
 ## Installation
-Most likely you'll want **iisexpress-proxy** installed as a global module:
+There's no need to install `iisexpress-proxy` if you're using `npm@^5.2.0`; you can simply [run it with `npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b). If you're using an older version of `npm`, you'll most likely want `iisexpress-proxy` installed as a global module:
 
     npm install -g iisexpress-proxy
 
