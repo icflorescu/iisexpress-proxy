@@ -60,7 +60,8 @@ var proxy = new httpProxy.createProxyServer({
   },
   secure: false,
   changeOrigin: true,
-  xfwd: true
+  xfwd: true,
+  followRedirects: true
 }).on('error', function (err) {
   console.log(err);
   console.log('Listening... [press Control-C to exit]');
