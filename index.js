@@ -53,15 +53,11 @@ Object.keys(interfaces).forEach(function(name) {
 });
 
 var proxy = new httpProxy.createProxyServer({
-  target: {
-    host: host,
-    port: port,
-    protocol: protocolPrefix
-  },
+  target: protocolPrefix + host + ':' + port,
   secure: false,
   changeOrigin: true,
   xfwd: true,
-  followRedirects: true
+  autoRewrite: true
 }).on('error', function (err) {
   console.log(err);
   console.log('Listening... [press Control-C to exit]');
