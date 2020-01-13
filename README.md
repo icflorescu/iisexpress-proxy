@@ -38,6 +38,10 @@ For instance, if your application's IIS Express port is 51123, run this in the C
 
 The program will list the external addresses you can use for testing your application on remote devices.
 
+`iisexpress-proxy` defaults to http, so if your application is running https, then include the full URL.
+
+    iisexpress-proxy https://localhost:51123 to 3000
+
 ## Advanced usage (VPN, virtual hosts, etc.)
 
 You can also use **iisexpress-proxy** to expose an IIS server instance running on a **different host** accessible through VPN, like this:
