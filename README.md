@@ -42,6 +42,8 @@ The program will list the external addresses you can use for testing your applic
 
     iisexpress-proxy https://localhost:51123 to 3000
 
+Note that this will terminate HTTPS. On your destination machine, connect to port `3000` using HTTP, not HTTPS.
+
 ## Advanced usage (VPN, virtual hosts, etc.)
 
 You can also use **iisexpress-proxy** to expose an IIS server instance running on a **different host** accessible through VPN, like this:
