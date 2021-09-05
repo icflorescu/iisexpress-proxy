@@ -48,7 +48,7 @@ Note that this will terminate HTTPS. On your destination machine, connect to por
 
 You can also use **iisexpress-proxy** to expose an IIS server instance running on a **different host** accessible through VPN, like this:
 
-    iisexpress-proxy host:port to proxyPort
+    iisexpress-proxy host:port to proxyHost:proxyPort
 
 For instance, let's conside this scenario:
 
@@ -58,9 +58,16 @@ For instance, let's conside this scenario:
 
 By running this in the Command Prompt:
 
-    iisexpress-proxy 192.168.96.3:5000 to 3000
+    iisexpress-proxy 192.168.96.3:5000 to 192.168.0.102:3000
 
 ...you'll be able to access the application by pointing the mobile devices to 192.168.0.102:3000.
+
+For another advanced example, consider that you're on public Wifi and don't want to publicly expose your dev server. You could
+set up a VPN between your laptop and your phone and only expose the server on the VPN interface (10.0.0.1). Then you can run
+
+    iisexpress-proxy 5000 to 10.0.0.1:8080
+
+...and open http://10.0.0.1:8080 on your phone with VPN enabled, while other wifi users won't be able to connect.
 
 Note: _This functionality was added at v1.1.0 (released 10/21/2015)_.
 
