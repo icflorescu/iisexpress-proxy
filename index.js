@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
 var os = require('os'),
-    http = require('http'),
     httpProxy = require('http-proxy'),
-    pkg = require('./package');
+    pkg = require('./package'),
+    { getTempSSLCert } = require('./generate-cert');
 
 var exit = function() {
   var bin = Object.keys(pkg.bin)[0];
   console.log('Usage examples:');
   console.log('\t%s 51123 to 3000', bin);
-  console.log('\t%s [http(s)://]192.168.0.100:51123 to 10.0.0.1:3000', bin);
-  console.log('\t%s [http://]domain.com:80 to 3000', bin);
-  console.log('\t%s [https://]ssl-domain.com:443 to 3000', bin);
+  console.log('\t%s 192.168.0.100:51123 to 10.0.0.1:3000', bin);
+  console.log('\t%s [http(s)://]domain.com:80 to 3000', bin);
+  console.log('\t%s [https://]ssl-domain.com:443 to [https://]192.168.1.1:3000', bin);
   console.log();
   process.exit();
 };
@@ -68,31 +68,21 @@ Object.keys(interfaces).forEach(function(name) {
   });
 });
 
+var ssl = undefined;
+if (target.protocol === 'https://') {
+  ssl = getTempSSLCert();
+}
+
 var proxy = new httpProxy.createProxyServer({
   target: source.protocol + source.host + ':' + source.port,
   secure: false,
   changeOrigin: true,
   xfwd: true,
-  autoRewrite: true
+  autoRewrite: true,
+  ws: true,
+  ssl,
 }).on('error', function (err) {
   console.log(err);
-  console.log('Listening... [press Control-C to exit]');
-});
-var proxyServer = http.createServer(function (req, res) {
-  proxy.web(req, res);
-});
-proxyServer.on('upgrade', function (req, socket, head) {
-  proxy.ws(req, socket, head);
-});
+}).listen(target.port, target.host === '*' ? '0.0.0.0' : target.host);
 
-var listenHost = target.host === '*' ? '0.0.0.0' : target.host;
-proxyServer.listen(target.port, listenHost, function() {
-  console.log('Listening... [press Control-C to exit]');
-}).on('error', function (err, req, res) {
-  console.log(err.stack);
-  console.log('Listening... [press Control-C to exit]');
-  res.writeHead(500, {
-    'Content-Type': 'text/plain'
-  });
-  res.end('Aw snap! Something went wrong. Check your console to see the error.');
-});
+console.log('Listening... [press Control-C to exit]');
