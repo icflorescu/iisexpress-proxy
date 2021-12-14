@@ -7,7 +7,14 @@ var os = require('os'),
 
 var exit = function() {
   var bin = Object.keys(pkg.bin)[0];
-  console.log('Usage examples:');
+  console.log('Usage:');
+  console.log('\t%s <SOURCE_TO_PROXY> to <PROXY_ENDPOINT>', bin);
+  console.log('\tBoth arguments can be port number, or address with port number with optional protocol');
+  console.log('\tIf no address is specified in SOURCE_TO_PROXY, it defaults to localhost.');
+  console.log('\tIf no address is specified for PROXY_ENDPOINT or it\'s "*", it will listen on all network interfaces');
+  console.log('\tIf you specify the address for PROXY_ENDPOINT (and not just port), it must be');
+  console.log('\tthe IP address of an existing network interface and cannot be a domain name.');
+  console.log('\nUsage examples:');
   console.log('\t%s 51123 to 3000', bin);
   console.log('\t%s 192.168.0.100:51123 to 10.0.0.1:3000', bin);
   console.log('\t%s [http(s)://]domain.com:80 to 3000', bin);

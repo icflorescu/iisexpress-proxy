@@ -44,13 +44,15 @@ The program will list the external addresses you can use for testing your applic
 
 Note that this will terminate HTTPS. On your destination machine, connect to port `3000` using HTTP, not HTTPS.
 
-If you want the proxy itself to server HTTPS, you can specify the target with the full URL as well.
+If you want the proxy itself to serve HTTPS, you can specify the target with the full URL as well.
 
     iisexpress-proxy https://localhost:51123 to https://*:3000
 
 This will generate a self-signed certificate and use it, openssl must be in `PATH` for this to work.
 
-If you want to bind to a specific interface instead of all of them, use its IP in the target URL, e.g. `https://10.0.0.1:3000`.
+*If you're on Windows, the easiest way to get openssl is to use Git Bash that comes with it pre-installed.*
+
+If you want to bind to a specific interface instead of all of them, use its IP in the target URL, e.g. `https://10.0.0.1:3000`. Note that the right-hand part cannot be a domain name.
 
 ## Advanced usage (VPN, virtual hosts, etc.)
 
