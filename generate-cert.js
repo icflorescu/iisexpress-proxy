@@ -17,7 +17,9 @@ exports.getTempSSLCert = function() {
       execSync(`openssl req -new -batch -key "${keyPath}" -out "${csrPath}"`);
       execSync(`openssl x509 -req -days 9999 -in "${csrPath}" -signkey "${keyPath}" -out "${certPath}"`);
     } catch (err) {
-      console.error('Failed to generate SSL cert, make sure openssl is in PATH.\n\n' + err);
+      console.log(err + '\n');
+      console.log('Failed to generate SSL cert, make sure the "openssl" command is in PATH.\nIf you\'re on Windows, we recommend running iisexpress-proxy in Git Bash, which comes with openssl pre-installed.');
+      process.exit(1);
     }
   }
 
