@@ -1,7 +1,6 @@
 ## iisexpress-proxy
 
 [![NPM version][npm-image]][npm-url]
-[![Dependency Status][david-image]][david-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
@@ -50,7 +49,7 @@ If you want the proxy itself to serve HTTPS, you can specify the target with the
 
 This will generate a self-signed certificate and use it, openssl must be in `PATH` for this to work.
 
-*If you're on Windows, the easiest way to get openssl is to use Git Bash that comes with it pre-installed.*
+_If you're on Windows, the easiest way to get openssl is to use Git Bash that comes with it pre-installed._
 
 If you want to bind to a specific interface instead of all of them, use its IP in the target URL, e.g. `https://10.0.0.1:3000`. Note that the right-hand part cannot be a domain name.
 
@@ -114,8 +113,6 @@ The [ISC License](https://github.com/icflorescu/iisexpress-proxy/blob/master/LIC
 
 [npm-image]: https://img.shields.io/npm/v/iisexpress-proxy.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/iisexpress-proxy
-[david-image]: http://img.shields.io/david/icflorescu/iisexpress-proxy.svg?style=flat-square
-[david-url]: https://david-dm.org/icflorescu/iisexpress-proxy
 [license-image]: http://img.shields.io/npm/l/iisexpress-proxy.svg?style=flat-square
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/iisexpress-proxy.svg?style=flat-square
