@@ -27,4 +27,4 @@ exports.getTempSSLCert = function() {
     key: fs.readFileSync(keyPath),
     cert: fs.readFileSync(certPath),
   };
-}
+};

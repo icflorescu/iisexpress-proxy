@@ -16,8 +16,9 @@ Have you ever been frustrated by the fact that [there's no easy way](https://www
 ## Installation
 
 There's no need to install `iisexpress-proxy` if you're using `npm@^5.2.0`; you can simply [run it with `npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b). If you're using an older version of `npm`, you'll most likely want `iisexpress-proxy` installed as a global module:
-
-    npm install -g iisexpress-proxy
+```sh
+npm install -g iisexpress-proxy
+```
 
 Note: _You need to have [Node.js](https://nodejs.org/) installed._
 
@@ -25,11 +26,15 @@ Note: _You need to have [Node.js](https://nodejs.org/) installed._
 
 If you're using `npm@^5.2.0`:
 
-    npx iisexpress-proxy localPort to proxyPort
+```sh
+npx iisexpress-proxy localPort to proxyPort
+```
 
 Alternatively, if you installed **iisexpress-proxy** as a global `npm` module:
 
-    iisexpress-proxy localPort to proxyPort
+```sh
+iisexpress-proxy localPort to proxyPort
+```
 
 For instance, if your application's IIS Express port is 51123, run this in the Command Prompt:
 
@@ -39,13 +44,17 @@ The program will list the external addresses you can use for testing your applic
 
 `iisexpress-proxy` defaults to http, so if your application is running https, then include the full URL.
 
-    iisexpress-proxy https://localhost:51123 to 3000
+```sh
+iisexpress-proxy https://localhost:51123 to 3000
+```
 
 Note that this will terminate HTTPS. On your destination machine, connect to port `3000` using HTTP, not HTTPS.
 
 If you want the proxy itself to serve HTTPS, you can specify the target with the full URL as well.
 
-    iisexpress-proxy https://localhost:51123 to https://*:3000
+```sh
+iisexpress-proxy https://localhost:51123 to https://*:3000
+```
 
 This will generate a self-signed certificate and use it, openssl must be in `PATH` for this to work.
 
@@ -57,7 +66,9 @@ If you want to bind to a specific interface instead of all of them, use its IP i
 
 You can also use **iisexpress-proxy** to expose an IIS server instance running on a **different host** accessible through VPN, like this:
 
-    iisexpress-proxy host:port to proxyHost:proxyPort
+```sh
+iisexpress-proxy host:port to proxyHost:proxyPort
+```
 
 For instance, let's conside this scenario:
 
@@ -67,20 +78,32 @@ For instance, let's conside this scenario:
 
 By running this in the Command Prompt:
 
-    iisexpress-proxy 192.168.96.3:5000 to 192.168.0.102:3000
+```sh
+iisexpress-proxy 192.168.96.3:5000 to 192.168.0.102:3000
+```
 
 ...you'll be able to access the application by pointing the mobile devices to 192.168.0.102:3000.
 
 For another advanced example, consider that you're on public Wifi and don't want to publicly expose your dev server. You could
 set up a VPN between your laptop and your phone and only expose the server on the VPN interface (10.0.0.1). Then you can run
 
-    iisexpress-proxy 5000 to 10.0.0.1:8080
+```sh
+iisexpress-proxy 5000 to 10.0.0.1:8080
+```
 
 ...and open http://10.0.0.1:8080 on your phone with VPN enabled, while other wifi users won't be able to connect.
 
 Note: _This functionality was added at v1.1.0 (released 10/21/2015)_.
 
 WebSocket support was added in `v1.4.0` by [Stan Hebben](https://github.com/stanhebben) - see [PR #11](https://github.com/icflorescu/iisexpress-proxy/pull/21) for details.
+
+If you don't want using generated certificates you could provide your own certificate and key using `cert`/`key` arguments:
+
+```sh
+iisexpress-proxy https://localhost:51123 to https://*:3000 --key=./your-key.pem --cert=./your-cert.pem
+```
+
+Note: _This functionality was added at v1.7.0 (released 02/14/2022)_.
 
 ## Limitations
 

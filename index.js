@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
-var os = require('os'),
+var fs = require('fs'),
+    os = require('os'),
+    path = require('path'),
     httpProxy = require('http-proxy'),
+    parseArgs = require('minimist'),
     pkg = require('./package'),
     { getTempSSLCert } = require('./generate-cert');
 
@@ -23,36 +26,38 @@ var exit = function() {
   process.exit();
 };
 
+var args = parseArgs(process.argv);
+
 console.log('IIS Express Proxy %s', pkg.version);
 
-if (process.argv.length != 5 || process.argv[3].toLowerCase() !== 'to') {
+if (args._.length != 5 || args._[3].toLowerCase() !== 'to') {
   exit();
 }
 
 var urlRegExp = /^(https?:\/\/)?(.+?)(?:\:(\d+))$/;
-var sourceMatch = process.argv[2].match(urlRegExp);
-var targetMatch = process.argv[4].match(urlRegExp);
+var sourceMatch = args._[2].match(urlRegExp);
+var targetMatch = args._[4].match(urlRegExp);
 
 var source = {
   protocol: 'http://',
   host: 'localhost',
   port: 58106,
-}
+};
 var target = {
   protocol: 'http://',
   host: '*',
   port: 8080,
-}
+};
 
 if (sourceMatch === null) {
-  source.port = parseInt(process.argv[2], 10);
+  source.port = parseInt(args._[2], 10);
 } else {
   source.protocol = sourceMatch[1] || 'http://';
   source.host = sourceMatch[2];
   source.port = parseInt(sourceMatch[3], 10);
 }
 if (targetMatch === null) {
-  target.port = parseInt(process.argv[4], 10);
+  target.port = parseInt(args._[4], 10);
 } else {
   target.protocol = targetMatch[1] || 'http://';
   target.host = targetMatch[2];
@@ -78,6 +83,16 @@ Object.keys(interfaces).forEach(function(name) {
 var ssl = undefined;
 if (target.protocol === 'https://') {
   ssl = getTempSSLCert();
+}
+if(args.cert) {
+  var certPath = path.resolve(args.cert);
+  console.log('Reading certificate from: %s', certPath);
+  ssl.cert = fs.readFileSync(certPath);
+}
+if(args.key) {
+  var keyPath = path.resolve(args.key);
+  console.log('Reading certificate key from: %s', keyPath);
+  ssl.key = fs.readFileSync(keyPath);
 }
 
 var proxy = new httpProxy.createProxyServer({
