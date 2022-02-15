@@ -1,6 +1,6 @@
 {
   "name": "iisexpress-proxy",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "A simple local proxy useful for accessing IIS Express from remote machines.",
   "preferGlobal": true,
   "main": "index.js",
@@ -29,6 +29,7 @@
     "url": "https://github.com/icflorescu/iisexpress-proxy/issues"
   },
   "dependencies": {
-    "http-proxy": "^1.18.1"
+    "http-proxy": "^1.18.1",
+    "minimist": "^1.2.5"
   }
 }
