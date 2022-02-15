@@ -32,16 +32,17 @@ const exit = function () {
 };
 
 const args = parseArgs(process.argv);
+console.log(args);
 
 console.log('IIS Express Proxy %s', pkg.version);
 
-if (args._.length != 5 || args._[3].toLowerCase() !== 'to') {
+if (args._.length !== 5 || args._[3].toLowerCase() !== 'to') {
   exit();
 }
 
 const urlRegExp = /^(https?:\/\/)?(.+?)(?::(\d+))$/;
 const sourceMatch = args._[2].match(urlRegExp);
-const targetMatch = args._[4].match(urlRegExp);
+const targetMatch = String(args._[4]).match(urlRegExp);
 
 const source = {
   protocol: 'http://',
