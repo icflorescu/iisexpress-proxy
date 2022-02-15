@@ -13,7 +13,8 @@
     "remote",
     "iis",
     "visualstudio",
-    "vs"
+    "vs",
+    "windows"
   ],
   "author": {
     "name": "Ionut-Cristian Florescu",
