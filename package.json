@@ -3,6 +3,9 @@
   "version": "1.7.3",
   "description": "A simple local proxy useful for accessing IIS Express from remote machines.",
   "preferGlobal": true,
+  "engines": {
+    "node": ">=6"
+  },
   "main": "index.js",
   "bin": {
     "iisexpress-proxy": "./index.js"
