@@ -41,7 +41,7 @@ if (args._.length !== 5 || args._[3].toLowerCase() !== 'to') {
 }
 
 const urlRegExp = /^(https?:\/\/)?(.+?)(?::(\d+))$/;
-const sourceMatch = args._[2].match(urlRegExp);
+const sourceMatch = String(args._[2]).match(urlRegExp);
 const targetMatch = String(args._[4]).match(urlRegExp);
 
 const source = {
