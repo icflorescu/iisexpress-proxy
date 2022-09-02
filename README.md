@@ -4,6 +4,7 @@
 [![License][license-image]][license-url]
 [![Stars][stars-image]][repo-url]
 [![Forks][forks-image]][repo-url]
+[![Closed issues][closed-issues-image]][repo-url]
 [![Downloads][downloads-image]][npm-url]
 
 ![iisexpress-proxy](https://cloud.githubusercontent.com/assets/581999/13374338/4db36f40-dd8a-11e5-9248-a00a22e97eb0.png)
@@ -152,4 +153,5 @@ The [ISC License](https://github.com/icflorescu/iisexpress-proxy/blob/master/LIC
 [license-url]: LICENSE
 [stars-image]: https://img.shields.io/github/stars/icflorescu/iisexpress-proxy?style=flat-square
 [forks-image]: https://img.shields.io/github/forks/icflorescu/iisexpress-proxy?style=flat-square
+[closed-issues-image]: https://img.shields.io/github/issues-closed-raw/icflorescu/iisexpress-proxy?style=flat-square
 [downloads-image]: http://img.shields.io/npm/dm/iisexpress-proxy.svg?style=flat-square
