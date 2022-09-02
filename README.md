@@ -2,8 +2,9 @@
 
 [![NPM version][npm-image]][npm-url]
 [![License][license-image]][license-url]
-[![Stars][stars-image]][stars-url]
-[![Downloads][downloads-image]][downloads-url]
+[![Stars][stars-image]][repo-url]
+[![Forks][forks-image]][repo-url]
+[![Downloads][downloads-image]][npm-url]
 
 ![iisexpress-proxy](https://cloud.githubusercontent.com/assets/581999/13374338/4db36f40-dd8a-11e5-9248-a00a22e97eb0.png)
 
@@ -143,11 +144,12 @@ On 24th of February 2022 [Russia unlawfully invaded Ukraine](https://en.wikipedi
 
 The [ISC License](https://github.com/icflorescu/iisexpress-proxy/blob/master/LICENSE).
 
+[repo-url]: https://github.com/icflorescu/iisexpress-proxy
+[npm-url]: https://npmjs.org/package/iisexpress-proxy
 [npm-image]: https://img.shields.io/npm/v/iisexpress-proxy.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/iisexpress-proxy
 [license-image]: http://img.shields.io/npm/l/iisexpress-proxy.svg?style=flat-square
 [license-url]: LICENSE
 [stars-image]: https://img.shields.io/github/stars/icflorescu/iisexpress-proxy?style=flat-square
-[stars-url]: https://github.com/icflorescu/iisexpress-proxy
+[forks-image]: https://img.shields.io/github/forks/icflorescu/iisexpress-proxy?style=flat-square
 [downloads-image]: http://img.shields.io/npm/dm/iisexpress-proxy.svg?style=flat-square
-[downloads-url]: https://npmjs.org/package/iisexpress-proxy
