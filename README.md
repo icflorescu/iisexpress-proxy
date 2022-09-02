@@ -11,10 +11,6 @@
 
 A simple, yet practical command-line utility enabling .NET developers to test web applications served by IIS Express on remote devices.
 
-## ❤️🇺🇦
-
-See [below](#stand-with-ukraine).
-
 ## Motivation
 
 Are you a .NET developer building mobile web applications?
@@ -137,7 +133,7 @@ If you find this repo useful, please give it a star, [tweet about it](http://twi
 
 I'm getting lots of questions from people just learning to do web development or simply looking to solve a very specific problem they're dealing with. While I will answer some of them for the benefit of the community, please understand that open-source is a shared effort and it's definitely not about piggybacking on other people's work. On places like GitHub, that means raising issues is encouraged, but coming up with useful PRs is a lot better. If I'm willing to share some of my code for free, I'm doing it for a number of reasons: my own intellectual challenges, pride, arrogance, stubbornness to believe I'm bringing a contribution to common progress and freedom, etc. Your particular well-being is probably not one of those reasons. I'm not in the business of providing free consultancy, so if you need my help to solve your specific problem, there's a fee for that.
 
-## Stand with Ukraine
+## ❤️🇺🇦
 
 On 24th of February 2022 [Russia unlawfully invaded Ukraine](https://en.wikipedia.org/wiki/Russo-Ukrainian_War). This is an unjustified, unprovoked attack on the sovereignty of a neighboring country, but also an open affront to international peace and stability that has the potential to degenerate into a nuclear event threatening the very existence of humanity. I am a Romanian (EU) citizen, but I stand with Ukraine and I am doing everything in my power to stop this madness. Here's [how you can show your support](https://www.stopputin.net/).
 
