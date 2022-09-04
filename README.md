@@ -3,6 +3,8 @@
 [![NPM version][npm-image]][npm-url]
 [![License][license-image]][license-url]
 [![Stars][stars-image]][repo-url]
+[![Contributors][contributors-image]][repo-url]
+[![Last commit][last-commit-image]][repo-url]
 [![Forks][forks-image]][repo-url]
 [![Closed issues][closed-issues-image]][repo-url]
 [![Downloads][downloads-image]][npm-url]
@@ -152,6 +154,8 @@ The [ISC License](https://github.com/icflorescu/iisexpress-proxy/blob/master/LIC
 [license-image]: http://img.shields.io/npm/l/iisexpress-proxy.svg?style=flat-square
 [license-url]: LICENSE
 [stars-image]: https://img.shields.io/github/stars/icflorescu/iisexpress-proxy?style=flat-square
+[contributors-image]: https://img.shields.io/github/contributors-anon/icflorescu/iisexpress-proxy?style=flat-square
+[last-commit-image]: https://img.shields.io/github/last-commit/icflorescu/iisexpress-proxy?style=flat-square
 [forks-image]: https://img.shields.io/github/forks/icflorescu/iisexpress-proxy?style=flat-square
 [closed-issues-image]: https://img.shields.io/github/issues-closed-raw/icflorescu/iisexpress-proxy?style=flat-square
 [downloads-image]: http://img.shields.io/npm/dm/iisexpress-proxy.svg?style=flat-square
