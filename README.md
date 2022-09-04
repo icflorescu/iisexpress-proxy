@@ -123,6 +123,10 @@ If you need to access the original host requested by the browser, the request he
 This command-line utility wraps [http-proxy](https://github.com/nodejitsu/node-http-proxy).
 The original [http-proxy](https://github.com/nodejitsu/node-http-proxy) logo was created by [Diego Pasquali](http://dribbble.com/diegopq).
 
+## Contributors
+
+[![Contributors list](https://contrib.rocks/image?repo=icflorescu/iisexpress-proxy)](https://github.com/icflorescu/iisexpress-proxy/graphs/contributors)
+
 ## Endorsing the author
 
 If you find this repo useful, please give it a star, [tweet about it](http://twitter.com/share?text=Access%20your%20IIS%20Express%20applications%20from%20remote%20devices&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fiisexpress-proxy&hashtags=iisexpress%2Cremote%2Cvisualstudio%2Cnode.js&via=icflorescu) and endorse me on LinkedIn:
