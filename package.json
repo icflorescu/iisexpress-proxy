@@ -1,6 +1,6 @@
 {
   "name": "iisexpress-proxy",
-  "version": "1.7.22",
+  "version": "1.7.23",
   "description": "A simple local proxy useful for accessing IIS Express from remote machines.",
   "preferGlobal": true,
   "engines": {
@@ -37,8 +37,8 @@
     "minimist": "^1.2.6"
   },
   "devDependencies": {
-    "@types/node": "^18.7.16",
-    "eslint": "^8.23.0",
+    "@types/node": "^18.7.23",
+    "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0"
   }
 }
