@@ -24,6 +24,10 @@
     "email": "ionut.florescu@gmail.com",
     "url": "https://github.com/icflorescu"
   },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/icflorescu"
+  },
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -37,8 +41,8 @@
     "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "@types/node": "^18.15.11",
-    "eslint": "^8.38.0",
+    "@types/node": "^18.16.0",
+    "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0"
   }
 }
