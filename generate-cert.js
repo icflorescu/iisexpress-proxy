@@ -15,7 +15,9 @@ exports.getTempSSLCert = function () {
     try {
       execSync(`openssl genrsa -out "${keyPath}"`, {});
       execSync(`openssl req -new -batch -key "${keyPath}" -out "${csrPath}"`);
-      execSync(`openssl x509 -req -days 9999 -in "${csrPath}" -signkey "${keyPath}" -out "${certPath}"`);
+      execSync(
+        `openssl x509 -req -days 9999 -in "${csrPath}" -signkey "${keyPath}" -out "${certPath}"`
+      );
     } catch (err) {
       console.log(err + '\n');
       console.log(
