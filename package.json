@@ -1,6 +1,6 @@
 {
   "name": "iisexpress-proxy",
-  "version": "1.7.29",
+  "version": "1.7.30",
   "description": "A simple local proxy useful for accessing IIS Express from remote machines.",
   "preferGlobal": true,
   "engines": {
@@ -11,13 +11,15 @@
     "iisexpress-proxy": "./index.js"
   },
   "keywords": [
+    "iis",
     "iisexpress",
     "proxy",
     "remote",
-    "iis",
+    "network",
     "visualstudio",
     "vs",
-    "windows"
+    "windows",
+    "microsoft"
   ],
   "author": {
     "name": "Ionut-Cristian Florescu",
