@@ -3,7 +3,7 @@
 [![NPM version][npm-image]][npm-url]
 [![License][license-image]][license-url]
 [![Stars][stars-image]][repo-url]
-[![Contributors][contributors-image]][repo-url]
+[![Contributors][contributors-image]][repo-url]  
 [![Last commit][last-commit-image]][repo-url]
 [![Forks][forks-image]][repo-url]
 [![Closed issues][closed-issues-image]][repo-url]
