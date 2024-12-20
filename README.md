@@ -33,7 +33,7 @@ Note: _You need to have [Node.js](https://nodejs.org/) installed._
 If you're using `npm@^5.2.0`:
 
 ```sh
-npx iisexpress-proxy localPort to proxyPort
+npx iisexpress-proxy@latest localPort to proxyPort
 ```
 
 Alternatively, if you installed **iisexpress-proxy** as a global `npm` module:
