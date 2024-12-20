@@ -32,7 +32,6 @@ const exit = function () {
 };
 
 const args = parseArgs(process.argv);
-console.log(args);
 
 console.log('IIS Express Proxy %s', pkg.version);
 
