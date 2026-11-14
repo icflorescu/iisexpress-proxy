@@ -21,30 +21,30 @@ Have you ever been frustrated by the fact that [there's no easy way](https://www
 
 ## Installation
 
-There's no need to install `iisexpress-proxy` if you're using `npm@^5.2.0`; you can simply [run it with `npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b). If you're using an older version of `npm`, you'll most likely want `iisexpress-proxy` installed as a global module:
-```sh
-npm install -g iisexpress-proxy
-```
+You need [Node.js](https://nodejs.org/) **22 or newer**.
 
-Note: _You need to have [Node.js](https://nodejs.org/) installed._
-
-## Usage
-
-If you're using `npm@^5.2.0`:
+There's no need to install `iisexpress-proxy`; you can simply run it with `npx`:
 
 ```sh
 npx iisexpress-proxy@latest localPort to proxyPort
 ```
 
-Alternatively, if you installed **iisexpress-proxy** as a global `npm` module:
+If you use it often, you may prefer installing it as a global module:
 
 ```sh
+npm install -g iisexpress-proxy
 iisexpress-proxy localPort to proxyPort
 ```
 
+> **Upgrading from 1.x?** Version 2 requires Node.js 22+ and is otherwise a drop-in replacement. If you're stuck on an older Node.js version, use `npx iisexpress-proxy@1 ...`.
+
+## Usage
+
 For instance, if your application's IIS Express port is 51123, run this in the Command Prompt:
 
-    iisexpress-proxy 51123 to 3000
+```sh
+npx iisexpress-proxy@latest 51123 to 3000
+```
 
 The program will list the external addresses you can use for testing your application on remote devices.
 
@@ -101,13 +101,15 @@ iisexpress-proxy 5000 to 10.0.0.1:8080
 
 Note: _This functionality was added at v1.1.0 (released 10/21/2015)_.
 
-WebSocket support was added in `v1.4.0` by [Stan Hebben](https://github.com/stanhebben) - see [PR #11](https://github.com/icflorescu/iisexpress-proxy/pull/21) for details.
+WebSocket support was added in `v1.4.0` by [Stan Hebben](https://github.com/stanhebben) - see [PR #21](https://github.com/icflorescu/iisexpress-proxy/pull/21) for details.
 
 If you don't want using generated certificates you could provide your own certificate and key using `cert`/`key` arguments:
 
 ```sh
 iisexpress-proxy https://localhost:51123 to https://*:3000 --key=./your-key.pem --cert=./your-cert.pem
 ```
+
+When both `--cert` and `--key` are provided, openssl is not needed.
 
 Note: _This functionality was added at v1.7.0 (released 02/14/2022)_.
 
@@ -117,14 +119,16 @@ Note: _This functionality was added at v1.7.0 (released 02/14/2022)_.
 
 ## How does it work
 
-It's proxying the HTTP traffic on `localPort` to `proxyPort` on all the available network interfaces and it's also [changing the origin of the host header](https://github.com/nodejitsu/node-http-proxy/blob/master/lib/http-proxy.js#L44), allowing you to test web applications hosted by IIS Express on various remote devices (mobile devices, other desktops, etc.).
+It's proxying the HTTP traffic on `localPort` to `proxyPort` on all the available network interfaces and it's also [changing the origin of the host header](https://github.com/sagemathinc/http-proxy-3#options), allowing you to test web applications hosted by IIS Express on various remote devices (mobile devices, other desktops, etc.).
+
+If the application can't be reached, the proxy responds with `502 Bad Gateway` and logs the reason in the console.
 
 If you need to access the original host requested by the browser, the request headers will include X-Forward headers. In ASP.NET, `Request.Headers["x-forwarded-host"]` will contain the requested host.
 
 ## Credits and attributions
 
-This command-line utility wraps [http-proxy](https://github.com/nodejitsu/node-http-proxy).
-The original [http-proxy](https://github.com/nodejitsu/node-http-proxy) logo was created by [Diego Pasquali](http://dribbble.com/diegopq).
+This command-line utility wraps [http-proxy-3](https://github.com/sagemathinc/http-proxy-3), a maintained successor of [http-proxy](https://github.com/http-party/node-http-proxy).
+The original [http-proxy](https://github.com/http-party/node-http-proxy) logo was created by [Diego Pasquali](https://dribbble.com/diegopq).
 
 ## Contributors
 
@@ -132,7 +136,7 @@ The original [http-proxy](https://github.com/nodejitsu/node-http-proxy) logo was
 
 ## Endorsing the author
 
-If you find this repo useful, please give it a star, [tweet about it](http://twitter.com/share?text=Access%20your%20IIS%20Express%20applications%20from%20remote%20devices&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fiisexpress-proxy&hashtags=iisexpress%2Cremote%2Cvisualstudio%2Cnode.js&via=icflorescu) and endorse me on LinkedIn:
+If you find this repo useful, please give it a star, [tweet about it](https://twitter.com/share?text=Access%20your%20IIS%20Express%20applications%20from%20remote%20devices&url=https%3A%2F%2Fgithub.com%2Ficflorescu%2Fiisexpress-proxy&hashtags=iisexpress%2Cremote%2Cvisualstudio%2Cnode.js&via=icflorescu) and endorse me on LinkedIn:
 
 [![Ionut-Cristian Florescu on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x25.png)](https://www.linkedin.com/in/icflorescu)
 
@@ -149,16 +153,15 @@ On 24th of February 2022 [Russia unlawfully invaded Ukraine](https://en.wikipedi
 The [ISC License](https://github.com/icflorescu/iisexpress-proxy/blob/master/LICENSE).
 
 [repo-url]: https://github.com/icflorescu/iisexpress-proxy
-[npm-url]: https://npmjs.org/package/iisexpress-proxy
+[npm-url]: https://www.npmjs.com/package/iisexpress-proxy
 [npm-image]: https://img.shields.io/npm/v/iisexpress-proxy.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/iisexpress-proxy
-[license-image]: http://img.shields.io/npm/l/iisexpress-proxy.svg?style=flat-square
+[license-image]: https://img.shields.io/npm/l/iisexpress-proxy.svg?style=flat-square
 [license-url]: LICENSE
 [stars-image]: https://img.shields.io/github/stars/icflorescu/iisexpress-proxy?style=flat-square
 [contributors-image]: https://img.shields.io/github/contributors-anon/icflorescu/iisexpress-proxy?style=flat-square
 [last-commit-image]: https://img.shields.io/github/last-commit/icflorescu/iisexpress-proxy?style=flat-square
 [forks-image]: https://img.shields.io/github/forks/icflorescu/iisexpress-proxy?style=flat-square
 [closed-issues-image]: https://img.shields.io/github/issues-closed-raw/icflorescu/iisexpress-proxy?style=flat-square
-[downloads-image]: http://img.shields.io/npm/dm/iisexpress-proxy.svg?style=flat-square
+[downloads-image]: https://img.shields.io/npm/dm/iisexpress-proxy.svg?style=flat-square
 [sponsor-image]: https://img.shields.io/badge/sponsor-violet?style=flat-square
 [sponsor-url]: https://github.com/sponsors/icflorescu
