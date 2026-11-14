@@ -125,6 +125,30 @@ iisexpress-proxy 5000 to 10.0.0.1:8080
 
 ...and open http://10.0.0.1:8080 on your phone with VPN enabled, while other Wi-Fi users won't be able to connect.
 
+### Proxying multiple sites
+
+Each `iisexpress-proxy` instance handles a single source/target pair. To proxy several sites at once, start one instance per site, each in its own window, using a batch file such as `proxies.bat`:
+
+```bat
+@echo off
+start "Site 1" iisexpress-proxy 51123 to 3000
+start "Site 2" iisexpress-proxy 51124 to 3001
+start "Site 3" iisexpress-proxy 51125 to 3002
+```
+
+For a range of consecutive ports, use a loop instead. This one maps `8100..8105` to `3000..3005`:
+
+```bat
+@echo off
+setlocal enabledelayedexpansion
+for /L %%p in (8100,1,8105) do (
+  set /a t=%%p-8100+3000
+  start "Proxy %%p" iisexpress-proxy %%p to !t!
+)
+```
+
+Closing a window stops that proxy. These scripts assume a global install; with `npx`, every window resolves the package at the same time, which is slower.
+
 ## Troubleshooting
 
 **The device can't connect at all.**
