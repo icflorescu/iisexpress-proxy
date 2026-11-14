@@ -1,24 +1,25 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-const httpProxy = require('http-proxy');
+const fs = require('node:fs');
+const http = require('node:http');
+const https = require('node:https');
+const os = require('node:os');
+const path = require('node:path');
+const { createProxyServer } = require('http-proxy-3');
 const parseArgs = require('minimist');
-const pkg = require('./package');
+const pkg = require('./package.json');
 const { getTempSSLCert } = require('./generate-cert');
-const process = require('process');
 
-const exit = function () {
+const usage = () => {
   const bin = Object.keys(pkg.bin)[0];
   console.log('Usage:');
-  console.log('\t%s <SOURCE_TO_PROXY> to <PROXY_ENDPOINT>', bin);
+  console.log('\t%s <SOURCE_TO_PROXY> to <PROXY_ENDPOINT> [--cert=<path> --key=<path>]', bin);
   console.log(
-    '\tBoth arguments can be port number, or address with port number with optional protocol'
+    '\tBoth arguments can be port number, or address with port number with optional protocol',
   );
   console.log('\tIf no address is specified in SOURCE_TO_PROXY, it defaults to localhost.');
   console.log(
-    '\tIf no address is specified for PROXY_ENDPOINT or it\'s "*", it will listen on all network interfaces'
+    '\tIf no address is specified for PROXY_ENDPOINT or it\'s "*", it will listen on all network interfaces',
   );
   console.log('\tIf you specify the address for PROXY_ENDPOINT (and not just port), it must be');
   console.log('\tthe IP address of an existing network interface and cannot be a domain name.');
@@ -28,96 +29,112 @@ const exit = function () {
   console.log('\t%s [http(s)://]domain.com:80 to 3000', bin);
   console.log('\t%s [https://]ssl-domain.com:443 to [https://]192.168.1.1:3000', bin);
   console.log();
-  process.exit();
+  process.exit(1);
 };
 
-const args = parseArgs(process.argv);
+const urlRegExp = /^(https?:\/\/)?(.+?)(?::(\d+))$/;
+
+const parseEndpoint = (value, defaultHost) => {
+  const match = String(value).match(urlRegExp);
+  if (match === null) {
+    return { protocol: 'http://', host: defaultHost, port: parseInt(value, 10) };
+  }
+  return {
+    protocol: match[1] || 'http://',
+    host: match[2],
+    port: parseInt(match[3], 10),
+  };
+};
+
+const args = parseArgs(process.argv.slice(2), { string: ['cert', 'key'] });
 
 console.log('IIS Express Proxy %s', pkg.version);
 
-if (args._.length !== 5 || args._[3].toLowerCase() !== 'to') {
-  exit();
+if (args._.length !== 3 || String(args._[1]).toLowerCase() !== 'to') {
+  usage();
 }
 
-const urlRegExp = /^(https?:\/\/)?(.+?)(?::(\d+))$/;
-const sourceMatch = String(args._[2]).match(urlRegExp);
-const targetMatch = String(args._[4]).match(urlRegExp);
+const source = parseEndpoint(args._[0], 'localhost');
+const target = parseEndpoint(args._[2], '*');
 
-const source = {
-  protocol: 'http://',
-  host: 'localhost',
-  port: 58106,
-};
-const target = {
-  protocol: 'http://',
-  host: '*',
-  port: 8080,
-};
-
-if (sourceMatch === null) {
-  source.port = parseInt(args._[2], 10);
-} else {
-  source.protocol = sourceMatch[1] || 'http://';
-  source.host = sourceMatch[2];
-  source.port = parseInt(sourceMatch[3], 10);
-}
-if (targetMatch === null) {
-  target.port = parseInt(args._[4], 10);
-} else {
-  target.protocol = targetMatch[1] || 'http://';
-  target.host = targetMatch[2];
-  target.port = parseInt(targetMatch[3], 10);
+if (Number.isNaN(source.port) || Number.isNaN(target.port)) {
+  usage();
 }
 
-if (isNaN(source.port) || isNaN(target.port)) {
-  exit();
+if ((args.cert || args.key) && target.protocol !== 'https://') {
+  console.log('The --cert and --key options only apply to an https:// PROXY_ENDPOINT.\n');
+  usage();
 }
-
-console.log('Proxying %s%s:%d to network interfaces:', source.protocol, source.host, source.port);
-
-const interfaces = os.networkInterfaces();
-
-Object.keys(interfaces).forEach(function (name) {
-  interfaces[name]
-    .filter(function (item) {
-      return (
-        item.family == 'IPv4' &&
-        !item.internal &&
-        (target.host == item.address || target.host === '*')
-      );
-    })
-    .forEach(function (item) {
-      console.log('\t%s: %s%s:%s', name, target.protocol, item.address, target.port);
-    });
-});
 
 let ssl;
 if (target.protocol === 'https://') {
-  ssl = getTempSSLCert();
-}
-if (args.cert) {
-  const certPath = path.resolve(args.cert);
-  console.log('Reading certificate from: %s', certPath);
-  ssl.cert = fs.readFileSync(certPath);
-}
-if (args.key) {
-  const keyPath = path.resolve(args.key);
-  console.log('Reading certificate key from: %s', keyPath);
-  ssl.key = fs.readFileSync(keyPath);
+  if (args.cert && args.key) {
+    const certPath = path.resolve(args.cert);
+    const keyPath = path.resolve(args.key);
+    console.log('Reading certificate from: %s', certPath);
+    console.log('Reading certificate key from: %s', keyPath);
+    ssl = { cert: fs.readFileSync(certPath), key: fs.readFileSync(keyPath) };
+  } else {
+    if (args.cert || args.key) {
+      console.log('Both --cert and --key are required, falling back to a self-signed certificate.');
+    }
+    ssl = getTempSSLCert();
+  }
 }
 
-new httpProxy.createProxyServer({
-  target: source.protocol + source.host + ':' + source.port,
+const proxy = createProxyServer({
+  target: `${source.protocol}${source.host}:${source.port}`,
   secure: false,
   changeOrigin: true,
   xfwd: true,
   autoRewrite: true,
   ws: true,
-  ssl,
-})
-  .on('error', function (err) {
-    console.log(err);
-  })
-  .listen(target.port, target.host === '*' ? '0.0.0.0' : target.host);
+});
 
-console.log('Listening... [press Control-C to exit]');
+proxy.on('error', (err, _req, res) => {
+  const message = err.message || err.code || String(err);
+  console.log('Proxy error: %s', message);
+  // `res` is a ServerResponse for HTTP requests and a Socket for WebSocket upgrades
+  if (res && typeof res.writeHead === 'function') {
+    if (!res.headersSent) {
+      res.writeHead(502, { 'Content-Type': 'text/plain' });
+    }
+    res.end(`Bad gateway: ${message}`);
+  } else if (res && typeof res.destroy === 'function') {
+    res.destroy();
+  }
+});
+
+const handler = (req, res) => {
+  proxy.web(req, res);
+};
+const server = ssl ? https.createServer(ssl, handler) : http.createServer(handler);
+
+server.on('upgrade', (req, socket, head) => {
+  proxy.ws(req, socket, head);
+});
+
+server.on('error', (err) => {
+  console.log('Server error: %s', err.message);
+  process.exit(1);
+});
+
+console.log('Proxying %s%s:%d to network interfaces:', source.protocol, source.host, source.port);
+
+const interfaces = os.networkInterfaces();
+Object.keys(interfaces).forEach((name) => {
+  interfaces[name]
+    .filter(
+      (item) =>
+        item.family === 'IPv4' &&
+        !item.internal &&
+        (target.host === item.address || target.host === '*'),
+    )
+    .forEach((item) => {
+      console.log('\t%s: %s%s:%s', name, target.protocol, item.address, target.port);
+    });
+});
+
+server.listen(target.port, target.host === '*' ? '0.0.0.0' : target.host, () => {
+  console.log('Listening... [press Control-C to exit]');
+});

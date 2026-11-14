@@ -1,25 +1,42 @@
 {
   "name": "iisexpress-proxy",
-  "version": "1.7.37",
-  "description": "A simple local proxy useful for accessing IIS Express from remote machines.",
-  "preferGlobal": true,
+  "version": "2.0.0",
+  "description": "Expose IIS Express, Kestrel or any local dev server to phones, tablets and other devices on your network.",
   "engines": {
-    "node": ">=6"
+    "node": ">=22"
   },
-  "main": "index.js",
   "bin": {
     "iisexpress-proxy": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "generate-cert.js"
+  ],
+  "scripts": {
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "node --test"
   },
   "keywords": [
     "iis",
     "iisexpress",
+    "iis-express",
+    "kestrel",
+    "aspnet",
+    "aspnetcore",
+    "dotnet",
+    "visualstudio",
+    "windows",
     "proxy",
+    "reverse-proxy",
     "remote",
     "network",
-    "visualstudio",
-    "vs",
-    "windows",
-    "microsoft"
+    "lan",
+    "mobile",
+    "device-testing",
+    "https",
+    "websocket",
+    "cli"
   ],
   "author": {
     "name": "Ionut-Cristian Florescu",
@@ -31,20 +48,20 @@
     "url": "https://github.com/sponsors/icflorescu"
   },
   "license": "ISC",
+  "homepage": "https://github.com/icflorescu/iisexpress-proxy#readme",
   "repository": {
     "type": "git",
-    "url": "git://github.com/icflorescu/iisexpress-proxy.git"
+    "url": "git+https://github.com/icflorescu/iisexpress-proxy.git"
   },
   "bugs": {
     "url": "https://github.com/icflorescu/iisexpress-proxy/issues"
   },
   "dependencies": {
-    "http-proxy": "^1.18.1",
+    "http-proxy-3": "^2.0.2",
     "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "@types/node": "^22.10.2",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0"
+    "@biomejs/biome": "2.6.4",
+    "@types/node": "^22.20.5"
   }
 }
