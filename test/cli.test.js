@@ -59,6 +59,10 @@ before(async () => {
     res.end(JSON.stringify({ url: req.url, headers: req.headers }));
   });
   backend.on('upgrade', (_req, socket) => {
+    // Upgraded sockets are handed over without an error listener; when the proxy
+    // process is killed on Windows the connection is reset (ECONNRESET) rather
+    // than closed, which would otherwise surface as an uncaught exception.
+    socket.on('error', () => {});
     socket.end(
       'HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n\r\n',
     );
@@ -66,7 +70,10 @@ before(async () => {
   await new Promise((resolve) => backend.listen(backendPort, '127.0.0.1', resolve));
 });
 
-after(() => backend.close());
+after(() => {
+  backend.closeAllConnections();
+  backend.close();
+});
 
 test('proxies HTTP requests and sets forwarding headers', async (t) => {
   const port = await getFreePort();
