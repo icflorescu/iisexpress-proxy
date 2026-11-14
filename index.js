@@ -10,16 +10,16 @@ const parseArgs = require('minimist');
 const pkg = require('./package.json');
 const { getTempSSLCert } = require('./generate-cert');
 
-const usage = function () {
+const usage = () => {
   const bin = Object.keys(pkg.bin)[0];
   console.log('Usage:');
   console.log('\t%s <SOURCE_TO_PROXY> to <PROXY_ENDPOINT> [--cert=<path> --key=<path>]', bin);
   console.log(
-    '\tBoth arguments can be port number, or address with port number with optional protocol'
+    '\tBoth arguments can be port number, or address with port number with optional protocol',
   );
   console.log('\tIf no address is specified in SOURCE_TO_PROXY, it defaults to localhost.');
   console.log(
-    '\tIf no address is specified for PROXY_ENDPOINT or it\'s "*", it will listen on all network interfaces'
+    '\tIf no address is specified for PROXY_ENDPOINT or it\'s "*", it will listen on all network interfaces',
   );
   console.log('\tIf you specify the address for PROXY_ENDPOINT (and not just port), it must be');
   console.log('\tthe IP address of an existing network interface and cannot be a domain name.');
@@ -34,7 +34,7 @@ const usage = function () {
 
 const urlRegExp = /^(https?:\/\/)?(.+?)(?::(\d+))$/;
 
-const parseEndpoint = function (value, defaultHost) {
+const parseEndpoint = (value, defaultHost) => {
   const match = String(value).match(urlRegExp);
   if (match === null) {
     return { protocol: 'http://', host: defaultHost, port: parseInt(value, 10) };
@@ -57,7 +57,7 @@ if (args._.length !== 3 || String(args._[1]).toLowerCase() !== 'to') {
 const source = parseEndpoint(args._[0], 'localhost');
 const target = parseEndpoint(args._[2], '*');
 
-if (isNaN(source.port) || isNaN(target.port)) {
+if (Number.isNaN(source.port) || Number.isNaN(target.port)) {
   usage();
 }
 
@@ -83,7 +83,7 @@ if (target.protocol === 'https://') {
 }
 
 const proxy = createProxyServer({
-  target: source.protocol + source.host + ':' + source.port,
+  target: `${source.protocol}${source.host}:${source.port}`,
   secure: false,
   changeOrigin: true,
   xfwd: true,
@@ -91,7 +91,7 @@ const proxy = createProxyServer({
   ws: true,
 });
 
-proxy.on('error', function (err, req, res) {
+proxy.on('error', (err, _req, res) => {
   const message = err.message || err.code || String(err);
   console.log('Proxy error: %s', message);
   // `res` is a ServerResponse for HTTP requests and a Socket for WebSocket upgrades
@@ -99,22 +99,22 @@ proxy.on('error', function (err, req, res) {
     if (!res.headersSent) {
       res.writeHead(502, { 'Content-Type': 'text/plain' });
     }
-    res.end('Bad gateway: ' + message);
+    res.end(`Bad gateway: ${message}`);
   } else if (res && typeof res.destroy === 'function') {
     res.destroy();
   }
 });
 
-const handler = function (req, res) {
+const handler = (req, res) => {
   proxy.web(req, res);
 };
 const server = ssl ? https.createServer(ssl, handler) : http.createServer(handler);
 
-server.on('upgrade', function (req, socket, head) {
+server.on('upgrade', (req, socket, head) => {
   proxy.ws(req, socket, head);
 });
 
-server.on('error', function (err) {
+server.on('error', (err) => {
   console.log('Server error: %s', err.message);
   process.exit(1);
 });
@@ -122,20 +122,19 @@ server.on('error', function (err) {
 console.log('Proxying %s%s:%d to network interfaces:', source.protocol, source.host, source.port);
 
 const interfaces = os.networkInterfaces();
-Object.keys(interfaces).forEach(function (name) {
+Object.keys(interfaces).forEach((name) => {
   interfaces[name]
-    .filter(function (item) {
-      return (
+    .filter(
+      (item) =>
         item.family === 'IPv4' &&
         !item.internal &&
-        (target.host === item.address || target.host === '*')
-      );
-    })
-    .forEach(function (item) {
+        (target.host === item.address || target.host === '*'),
+    )
+    .forEach((item) => {
       console.log('\t%s: %s%s:%s', name, target.protocol, item.address, target.port);
     });
 });
 
-server.listen(target.port, target.host === '*' ? '0.0.0.0' : target.host, function () {
+server.listen(target.port, target.host === '*' ? '0.0.0.0' : target.host, () => {
   console.log('Listening... [press Control-C to exit]');
 });

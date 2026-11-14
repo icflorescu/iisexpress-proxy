@@ -5,7 +5,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 
-exports.getTempSSLCert = function () {
+exports.getTempSSLCert = () => {
   const tmpDir = os.tmpdir();
   const certPath = path.join(tmpDir, 'iisexpress-proxy-cert.pem');
   const keyPath = path.join(tmpDir, 'iisexpress-proxy-key.pem');
@@ -27,12 +27,12 @@ exports.getTempSSLCert = function () {
           '-out',
           certPath,
         ],
-        { stdio: 'ignore' }
+        { stdio: 'ignore' },
       );
     } catch (err) {
-      console.log(err.message + '\n');
+      console.log(`${err.message}\n`);
       console.log(
-        'Failed to generate SSL cert, make sure the "openssl" command is in PATH.\nIf you\'re on Windows, we recommend running iisexpress-proxy in Git Bash, which comes with openssl pre-installed.'
+        'Failed to generate SSL cert, make sure the "openssl" command is in PATH.\nIf you\'re on Windows, we recommend running iisexpress-proxy in Git Bash, which comes with openssl pre-installed.',
       );
       process.exit(1);
     }
